@@ -18,6 +18,10 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
+    public function toLoginPage() {
+        return redirect()->route('admin.login');
+    }
+
     public function login(Request $request) {
         $request->validate([
             'username' => 'required',

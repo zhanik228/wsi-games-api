@@ -55,7 +55,7 @@ Route::prefix('admin')
 
 });
 
-Route::get('/', [\App\Http\Controllers\Admin\AdminController::class, 'index'])
+Route::get('/', [\App\Http\Controllers\Admin\AdminController::class, 'toLoginPage'])
     ->name('login');
 
 Route::get('game/{slug}', [\App\Http\Controllers\Admin\AdminController::class, 'gameById'])

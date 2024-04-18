@@ -23,7 +23,13 @@
             <tbody>
             @foreach($games as $game)
                 <tr class="position-relative">
-                    <td><img width="64" src="{{ route('game.file', [$game->slug, 'thumbnail.png']) }}" alt="thumbnail"></td>
+                    <td>
+                        @if(isset($game->gameVersion->version))
+                        <img 
+                            width="64" 
+                            src="{{ url("storage/games/$game->id/". ($game->gameVersion->version ?? 'v1') . '/thumbnail.png') }}" alt="thumbnail">
+                        @endif
+                    </td>
                     <td><a href="{{ route("game", $game) }}">{{ $game->title }}</a></td>
                     <td>{{ $game->description }}</td>
                     <td>{{ $game->author->username }}</td>

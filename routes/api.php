@@ -29,9 +29,13 @@ Route::prefix('v1')->middleware(['forcejson', 'check.block.user'])->group(functi
         });
     });
 //  Роуты для управления играми
-    Route::middleware(['auth:sanctum', 'check.game.author'])->group(function() {
+    Route::middleware(['auth:sanctum'])->group(function() {
+        Route::middleware(['check.game.author'])->group(function() {
+            Route::resource('games', \App\Http\Controllers\GameController::class)
+            ->only(['update', 'destroy']);
+        });
         Route::resource('games', \App\Http\Controllers\GameController::class)
-            ->only(['store', 'update', 'destroy']);
+            ->only(['store']);
     });
     Route::resource('games', \App\Http\Controllers\GameController::class)
         ->only(['index', 'show']);

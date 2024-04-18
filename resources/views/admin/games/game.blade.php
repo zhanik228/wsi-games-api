@@ -9,7 +9,7 @@
         <table cellpadding="4">
             <thead>
             <tr>
-                <th><img width="64" src="{{ route('game.file', [$game->slug, 'thumbnail.png']) }}" alt=""></th>
+                <th><img width="64" src="{{ url("storage/games/$game->id/". ($game->gameVersion->version ?? 'v1') . '/thumbnail.png') }}" alt=""></th>
                 <th>Title</th>
                 <th>Description</th>
                 <th>Author</th>
