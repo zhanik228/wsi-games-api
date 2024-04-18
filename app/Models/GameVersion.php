@@ -16,7 +16,7 @@ class GameVersion extends Model
     }
 
     public function game() {
-        return $this->belongsTo(Game::class, 'game_id')->withTrashed();
+        return $this->belongsTo(Game::class)->withTrashed();
     }
 
     public function thumbnailExists() {

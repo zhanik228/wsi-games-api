@@ -10,10 +10,10 @@ class Score extends Model
     use HasFactory;
 
     public function user() {
-        return $this->belongsTo(User::class, 'user_id')->withTrashed();
+        return $this->belongsTo(User::class);
     }
 
-    public function gameVersion() {
-        return $this->belongsTo(GameVersion::class, 'game_version_id');
+    public function scoreGameVersion() {
+        return $this->belongsTo(GameVersion::class, 'game_version_id')->withTrashed();
     }
 }

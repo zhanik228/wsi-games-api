@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CustomRequest;
 use App\Models\Game;
-use App\Models\GameVersion;
-use App\Models\Score;
 use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\Score;
+use App\Models\GameVersion;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GameController extends Controller
@@ -199,6 +201,7 @@ class GameController extends Controller
         if (auth('sanctum')->user()->id == $user->id) {
             $authoredGames = $user->authoredGamesAuthor;
         }
+
         $highscores = $user->highscores;
 
         return [
@@ -215,9 +218,9 @@ class GameController extends Controller
                 collect($highscores)->map(function ($highscore) {
                     return [
                         'game' => [
-                            'slug' => $highscore->gameVersion->game->slug,
-                            'title' => $highscore->gameVersion->game->title,
-                            'description' => $highscore->gameVersion->game->description
+                            'slug' => $highscore->scoreGameVersion->game->slug,
+                            'title' => $highscore->scoreGameVersion->game->title,
+                            'description' => $highscore->scoreGameVersion->game->description
                         ],
                         'score' => $highscore->score,
                         'timestamp' => $highscore->created_at

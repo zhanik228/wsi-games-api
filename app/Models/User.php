@@ -74,6 +74,6 @@ class User extends Authenticatable
     }
 
     public function highscores() {
-        return $this->hasMany(Score::class, 'user_id');
+        return $this->hasMany(Score::class);
     }
 }
